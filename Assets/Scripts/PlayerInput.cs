@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField]
+    Field field;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class PlayerInput : MonoBehaviour
 
     public void RollTheDice()
     {
-        GameManager.rollOfTheDice = Random.Range(1, 7);
+        GameManager.rollOfDice = Random.Range(1, 7);
+
+        field.MakeAMove(GameManager.rollOfDice, GameManager.whichPlayer);
     }
 }

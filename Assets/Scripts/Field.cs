@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
-
+    private int[] playerPosition;
     private int numOfTiles = 28;
-    private GameObject[] tiles;
+
     [SerializeField]
     private GameObject tile;
+    private GameObject[] tiles;
+
+    [SerializeField]
+    private GameObject playerSphere;
+    private GameObject[] playerSpheres = new GameObject[4];
 
     // Start is called before the first frame update
     void Start()
     {
+        playerPosition = new int[numOfTiles];
+
+        playerPosition[0] = 0;
+        playerSpheres[0] = Instantiate(playerSphere, new Vector3(0, 0.55f, 0), Quaternion.identity);
+
+        playerPosition[1] = numOfTiles / 4;
+        playerSpheres[1] = Instantiate(playerSphere, new Vector3(numOfTiles / 4, 0.55f, 0), Quaternion.identity);
+
+        playerPosition[2] = (numOfTiles / 4) * 2;
+        playerSpheres[2] = Instantiate(playerSphere, new Vector3(numOfTiles / 4, 0.55f, numOfTiles / 4), Quaternion.identity);
+
+        playerPosition[3] = (numOfTiles / 4) * 3;
+        playerSpheres[0] = Instantiate(playerSphere, new Vector3(0, 0.55f, numOfTiles / 4), Quaternion.identity);
+
+
         tiles = new GameObject[numOfTiles];
 
         for (int i = 0; i < numOfTiles; i++)
@@ -40,9 +60,12 @@ public class Field : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MakeAMove(int dice, int player)
     {
-        
+        playerPosition[player] += dice;
+        if (playerPosition[player] > numOfTiles)
+        {
+            playerPosition[player] -= (numOfTiles + 1);
+        }
     }
 }
