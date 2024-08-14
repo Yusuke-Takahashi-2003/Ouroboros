@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static int rollOfDice = 0;
     public static int whichPlayer = 0;
 
+    public static bool isPlayable = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +19,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static void ChangePlayer()
+    {
+        whichPlayer++;
+        if(whichPlayer == 4)
+        {
+            whichPlayer = 0;
+        }
     }
 }
